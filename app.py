@@ -617,7 +617,7 @@ uuid: {UUID}"""
     
     try:
         subprocess.Popen(command, shell=True, executable='/bin/bash')
-        logger.info('✅ nz started successfully')
+        logger.info('✅ successfully')
     except Exception as e:
         logger.error(f'Error running nz: {e}')
 
