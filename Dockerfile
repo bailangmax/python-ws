@@ -4,7 +4,7 @@ WORKDIR /tmp
 
 COPY app.py requirements.txt index.html ./
 
-EXPOSE 3000
+EXPOSE 3001
 
 RUN apk update && apk --no-cache add openssl bash curl &&\
     chmod +x app.py &&\
