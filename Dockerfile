@@ -1,13 +1,16 @@
 FROM python:3.12-alpine
 
-WORKDIR /tmp
+WORKDIR /app
 
-COPY app.py requirements.txt index.html ./
+# 优先安装依赖，利用 Docker 镜像缓存
+COPY requirements.txt ./
+RUN apk update && apk --no-cache add openssl bash curl && \
+    pip install --no-cache-dir -r requirements.txt
+
+# 拷贝项目文件
+COPY app.py index.html ./
+RUN chmod +x app.py
 
 EXPOSE 3001
 
-RUN apk update && apk --no-cache add openssl bash curl &&\
-    chmod +x app.py &&\
-    pip install -r requirements.txt
-    
 CMD ["python3", "app.py"]
